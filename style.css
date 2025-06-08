@@ -1,0 +1,142 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.game-container {
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+}
+
+h1 {
+    color: #333;
+}
+
+.doors-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.door {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    margin: 10px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.door-front, .door-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.door-front {
+    background-color: #8B4513;
+    color: white;
+    transform: rotateY(0deg);
+    background-image: url('door.png');
+}
+
+.door-back {
+    background-color: #f8f8f8;
+    transform: rotateY(180deg);
+}
+
+.door.selected .door-front {
+    background-color: #A0522D;
+}
+
+.door.opened .door-front {
+    transform: rotateY(180deg);
+}
+
+.door.opened .door-back {
+    transform: rotateY(0deg);
+}
+
+.door-back.car {
+    background-image: url('car.png');
+}
+
+.door-back.goat {
+    background-image: url('koza.png');
+}
+
+.controls {
+    margin: 20px 0;
+}
+
+.control-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.control-button:hover {
+    background-color: #45a049;
+}
+
+.control-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.message {
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 27px;
+    margin: 10px 0;
+}
+
+@media (max-width: 600px) {
+    .doors-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .door {
+        width: 150px;
+        height: 250px;
+        margin: 10px 0;
+    }
+    
+    .controls {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .control-button {
+        margin: 5px 0;
+    }
+}
