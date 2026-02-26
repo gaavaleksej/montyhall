@@ -1,1 +1,40 @@
 https://github.com/gaavaleksej/montyhall.git
+
+contract Users
+{
+    struct User {
+        string pwd;
+        bool exist;
+        bool ban;
+    }
+    mapping ( address => User) users;
+    address owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function register(string memory pwd) public 
+    {
+        require(!users[msg.sender].exist, "u a e");
+        User memory u;
+        u.pwd = pwd;
+        u.exist = true;
+        users[msg.sender] = u;
+    }
+
+    function auth(string memory pwd) public view returns (bool)
+    {
+        if (keccak256(abi.encodePacked(users.[msg.sender])) == keccak256(abi.encodePacked(pwd))) return true;
+        return false;
+    }
+
+    function change_pwd(string memory old_pwd, string memory new_pwd) public return (bool)
+    {
+        if (auth(old_pwd)) {
+            users[msg.sender] = new_pwd;
+            return true;
+        }
+        return false;
+    }
+}
